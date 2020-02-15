@@ -25,12 +25,17 @@ def listen():
 	###this line was temporary, used for testing
 	###print("Enter the number for the food you need:\n")
 
-	i= int(input())
+	#i= int(input())
+	i= raw_input()
+	if not i.isdigit():
+		return "Error: Incorrect input type"
+	else :
+		j= int(i)
 
-	if i < 0 or i > MAX:
-		return "Error: Invalid Input"
+	if j < 0 or j > MAX:
+		return "Error: Input out of range"
 	else: 
-		return grocery_index[i] 
+		return grocery_index[j] 
 
 ##connects to the file and then writes out the new item
 def	export(new_item):
