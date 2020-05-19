@@ -7,7 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 ### GLOBALS ###
-index_file= open("/home/pi/gitHUB/kitch_aid/msg_bird-master/grocery_index.txt", "r")
+index_file= open("./grocery_index.txt", "r")
 grocery_index= index_file.readlines()
 MAX= len(grocery_index)
 
@@ -16,7 +16,9 @@ MAX= len(grocery_index)
 SCOPES = ['https://www.googleapis.com/auth/documents']
 
 # The ID of a sample document.
-DOCUMENT_ID = '1FtdntyPniMYuV64z_8YSCmcK5zAzdk7FtxsiYr1eLSg'
+id_creds = open("./credentials.txt", "r") 
+DOCUMENT_ID= id_creds.readline()
+DOCUMENT_ID= DOCUMENT_ID[:-1]
 
 ### FUNCTIONS ###
 #sends integers to a list of grocery items which returns the indicated grocery item
@@ -48,7 +50,7 @@ def	export(new_item):
 			creds.refresh(Request())
 		else:
 			flow = InstalledAppFlow.from_client_secrets_file(
-				'/home/pi/gitHUB/kitch_aid/msg_bird-master/credentials.json', SCOPES)
+				'./credentials.json', SCOPES)
 			creds = flow.run_local_server(port=0)
 		# Save the credentials for the next run
 		with open('token.pickle', 'wb') as token:
@@ -72,7 +74,7 @@ def	export(new_item):
 
 
 ### EXECUTE ###
-if __name__ == '__main__':	##this is to gaurantee that you are in the right file
+if __name__ == '__main__':	
 	new_item= listen()
 	while(True):
 		if new_item == 'q':
