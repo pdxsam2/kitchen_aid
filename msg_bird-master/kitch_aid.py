@@ -22,18 +22,17 @@ DOCUMENT_ID = '1FtdntyPniMYuV64z_8YSCmcK5zAzdk7FtxsiYr1eLSg'
 #sends integers to a list of grocery items which returns the indicated grocery item
 def listen():
 
-	###this line was temporary, used for testing
-	###print("Enter the number for the food you need:\n")
-
-	#i= int(input())
 	i= raw_input()
-	if not i.isdigit():
-		return "Error: Incorrect input type"
+
+	if i == 'q':
+		return i;
+	elif not i.isdigit():
+		return "Error: Incorrect input type\n"
 	else :
 		j= int(i)
 
 	if j < 0 or j > MAX:
-		return "Error: Input out of range"
+		return "Error: Input out of range\n"
 	else: 
 		return grocery_index[j] 
 
@@ -76,6 +75,8 @@ def	export(new_item):
 if __name__ == '__main__':	##this is to gaurantee that you are in the right file
 	new_item= listen()
 	while(True):
+		if new_item == 'q':
+			exit()
 		export(new_item)
 		new_item= listen()
 
